@@ -1,0 +1,44 @@
+@import '../../../styles/variables.scss';
+
+.text-field-container {
+    position: relative;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.label {
+    color: $text-color-main;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.input {
+    padding: 13px 70px 13px 16px;
+    color: $text-color-main;
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #dadada;
+
+    &::placeholder {
+        color: $text-color-secondary;
+    }
+}
+
+.show-password-button {
+    position: absolute;
+    border: none;
+    cursor: pointer;
+    background: inherit;
+    right: 5px;
+    top: calc(50% - 15px);
+}
