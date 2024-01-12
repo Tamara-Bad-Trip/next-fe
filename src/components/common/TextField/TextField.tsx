@@ -13,10 +13,19 @@ interface TextFieldProps {
     placeholder?: string;
     id: string;
     value?: string;
+    passwordShow?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const TextField: React.FC<TextFieldProps> = ({ type = 'text', label, placeholder, id, value, onChange }) => {
+export const TextField: React.FC<TextFieldProps> = ({
+    type = 'text',
+    label,
+    placeholder,
+    id,
+    value,
+    onChange,
+    passwordShow = false,
+}) => {
     const [inputType, setInputType] = useState<'text' | 'password'>(type);
 
     const toggleInputType = () => {
@@ -39,7 +48,7 @@ export const TextField: React.FC<TextFieldProps> = ({ type = 'text', label, plac
                     onChange={onChange}
                     className={styles.input}
                 />
-                {id === 'password' && (
+                {!!passwordShow && (
                     <button type="button" onClick={toggleInputType} className={styles['show-password-button']}>
                         <Image
                             src={inputType === 'text' ? passwordOpenedIcon : passwordHiddenIcon}

@@ -10,3 +10,9 @@ $success-color: #27ae60;
 $error-color: #e74c3c;
 $link-color: $primary-color;
 $link-hover-color: darken($link-color, 10%);
+
+$breakpoint-xs: 375px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
