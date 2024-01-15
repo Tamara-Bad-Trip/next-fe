@@ -52,7 +52,7 @@ export const SignUpForm = () => {
                 <TextField id="email" type="text" label="Email" placeholder="Enter your email" />
                 <TextField id="password" type="text" label="Password" placeholder="Enter your password" />
                 <TextField id="userName" type="text" label="User Name" placeholder="Enter your User Name" />
-                <Button type="submit" label="Sign Up" />
+                <Button type="submit" label="Sign Up" disabled={!isDirty} loading={isSubmitting} />
             </form>
         </FormProvider>
     );

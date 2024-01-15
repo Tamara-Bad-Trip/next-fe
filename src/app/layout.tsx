@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
+import { Providers } from '@/components/template/Providers/Providers';
+
 import '../styles/globals.scss';
 
 const roboto = Roboto({
@@ -20,7 +22,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={roboto.className}>{children}</body>
+            <body className={roboto.className} suppressHydrationWarning={true}>
+                <Providers>{children}</Providers>
+            </body>
         </html>
     );
 }
