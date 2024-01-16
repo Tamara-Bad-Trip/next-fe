@@ -1,11 +1,14 @@
 'use client';
 
-import { useForm, FormProvider } from 'react-hook-form';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useApiService } from '@/api';
 
 import { TextField } from '@/components/common/TextField/TextField';
 import { Button } from '@/components/common/Button/Button';
+import { FormProvider } from '@/components/common/FormProvider/FormProvider';
 
 //--------------------------------------------------------
 
@@ -18,9 +21,10 @@ interface FormValues {
 //--------------------------------------------------------
 
 export const SignUpForm = () => {
-    const onSubmit = (values: any) => {
-        console.log(values);
-    };
+    const [errorMsg, setErrorMsg] = useState<string>('');
+    const [loading, setIsLoading] = useState<boolean>(false);
+
+    const api = useApiService();
 
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -41,19 +45,57 @@ export const SignUpForm = () => {
 
     const {
         reset,
-        setValue,
         handleSubmit,
-        formState: { isSubmitting, isDirty },
+        watch,
+        setValue,
+        formState: { isSubmitting },
     } = methods;
 
+    const values = watch();
+
+    const onSubmit = handleSubmit(async (data) => {
+        const { email, password, userName } = data;
+        try {
+            setIsLoading(true);
+            const result = await api.auth.signUp({ email, password, userName });
+            if (result) {
+                const user = await api.auth.signIn({ email, password });
+                console.log(user);
+            }
+        } catch (error) {
+            console.error(error);
+            reset();
+            // setErrorMsg(typeof error === 'string' ? error : (error?.message as string as));
+        }
+    });
+
     return (
-        <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
-                <TextField id="email" type="text" label="Email" placeholder="Enter your email" />
-                <TextField id="password" type="text" label="Password" placeholder="Enter your password" />
-                <TextField id="userName" type="text" label="User Name" placeholder="Enter your User Name" />
-                <Button type="submit" label="Sign Up" disabled={!isDirty} loading={isSubmitting} />
-            </form>
+        <FormProvider methods={methods} onSubmit={onSubmit}>
+            <TextField
+                id="email"
+                type="text"
+                label="Email"
+                placeholder="Enter your email"
+                value={values.email}
+                onChange={(event) => setValue('email', event.target.value)}
+            />
+            <TextField
+                id="password"
+                type="text"
+                label="Password"
+                placeholder="Enter your password"
+                value={values.password}
+                onChange={(event) => setValue('password', event.target.value)}
+            />
+            <TextField
+                id="userName"
+                type="text"
+                label="User Name"
+                placeholder="Enter your User Name"
+                value={values.userName}
+                onChange={(event) => setValue('userName', event.target.value)}
+            />
+            <Button type="submit" label="Sign Up" loading={isSubmitting && loading} />
         </FormProvider>
     );
 };

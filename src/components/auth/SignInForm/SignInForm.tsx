@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useApiService } from '@/api';
 
 import { TextField } from '@/components/common/TextField/TextField';
 import { Button } from '@/components/common/Button/Button';
-import { useApiService } from '@/api';
-import FormProvider from '@/components/common/FormProvider/FormProvider';
+import { FormProvider } from '@/components/common/FormProvider/FormProvider';
 
 //--------------------------------------------------------
 
@@ -51,7 +51,6 @@ export const SignInForm = () => {
     const values = watch();
 
     const onSubmit = handleSubmit(async (data) => {
-        console.log(data);
         const { email, password } = data;
         try {
             setIsLoading(true);
@@ -63,12 +62,6 @@ export const SignInForm = () => {
             // setErrorMsg(typeof error === 'string' ? error : (error?.message as string as));
         }
     });
-
-    // useEffect(() => {
-    //     if (authenticated) {
-    //         router.push(returnTo || PATH_AFTER_LOGIN);
-    //     }
-    // }, [authenticated, returnTo, router]);
 
     return (
         <FormProvider methods={methods} onSubmit={onSubmit}>
