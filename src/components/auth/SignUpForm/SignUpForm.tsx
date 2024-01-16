@@ -26,9 +26,16 @@ export const SignUpForm = () => {
 
     const api = useApiService();
 
+    const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email address').required('Email is required'),
-        password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+        password: Yup.string()
+            .matches(
+                passwordRegEx,
+                'Password must contain minimum 8 and maximum 20 characters, at least one uppercase letter, one lowercase letter, one number, and one special character',
+            )
+            .required('Password is required'),
         userName: Yup.string().required('User name is required'),
     });
 
