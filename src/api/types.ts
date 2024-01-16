@@ -4,7 +4,7 @@ export type SignInArgs = {
 };
 
 export type SignUpArgs = {
+    username: string;
     email: string;
     password: string;
-    userName: string;
 };

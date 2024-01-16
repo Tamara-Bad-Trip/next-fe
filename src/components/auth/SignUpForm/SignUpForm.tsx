@@ -57,7 +57,7 @@ export const SignUpForm = () => {
         const { email, password, userName } = data;
         try {
             setIsLoading(true);
-            const result = await api.auth.signUp({ email, password, userName });
+            const result = await api.auth.signUp({ username: userName, email, password });
             if (result) {
                 const user = await api.auth.signIn({ email, password });
                 console.log(user);
