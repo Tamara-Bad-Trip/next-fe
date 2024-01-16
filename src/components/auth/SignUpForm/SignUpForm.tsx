@@ -9,6 +9,7 @@ import { useApiService } from '@/api';
 import { TextField } from '@/components/common/TextField/TextField';
 import { Button } from '@/components/common/Button/Button';
 import { FormProvider } from '@/components/common/FormProvider/FormProvider';
+import { useRouter } from 'next/navigation';
 
 //--------------------------------------------------------
 
@@ -24,6 +25,7 @@ export const SignUpForm = () => {
     const [errorMsg, setErrorMsg] = useState<string>('');
     const [loading, setIsLoading] = useState<boolean>(false);
 
+    const router = useRouter();
     const api = useApiService();
 
     const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
@@ -66,8 +68,7 @@ export const SignUpForm = () => {
             setIsLoading(true);
             const result = await api.auth.signUp({ username: userName, email, password });
             if (result) {
-                const user = await api.auth.signIn({ email, password });
-                console.log(user);
+                router.push(`/sign-in`);
             }
         } catch (error) {
             console.error(error);
