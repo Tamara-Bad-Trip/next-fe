@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 import { endpoints } from './endpoints';
-import { SignInArgs } from './types';
+import { SignInArgs, SignUpArgs } from './types';
 
-export const _signUp = async (data: any) => {
+export const _signUp = async (data: SignUpArgs) => {
     const headers = {
         'Content-Type': 'application/json',
     };
