@@ -70,6 +70,12 @@ export const SignUpForm = () => {
             setIsLoading(true);
             const result = await api.auth.signUp({ username: userName, email, password });
             if (result) {
+                dispatch(
+                    showNotification({
+                        message: 'Account created!',
+                        type: 'success',
+                    }),
+                );
                 router.push(`/sign-in`);
             }
         } catch (error) {
