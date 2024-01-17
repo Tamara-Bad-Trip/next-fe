@@ -3,6 +3,7 @@ import { Roboto } from 'next/font/google';
 import { Providers } from '@/components/template/Providers/Providers';
 
 import '../styles/globals.scss';
+import Toast from '@/components/common/Toast/Toast';
 
 const roboto = Roboto({
     subsets: ['latin'],
@@ -23,7 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <body className={roboto.className} suppressHydrationWarning={true}>
-                <Providers>{children}</Providers>
+                <Providers>
+                    <Toast />
+                    {children}
+                </Providers>
             </body>
         </html>
     );

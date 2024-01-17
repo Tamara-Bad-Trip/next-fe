@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useApiService } from '@/api';
+import { showNotification } from '@/redux/actions/notification';
 
 import { TextField } from '@/components/common/TextField/TextField';
 import { Button } from '@/components/common/Button/Button';
@@ -20,10 +22,10 @@ interface FormValues {
 //--------------------------------------------------------
 
 export const SignInForm = () => {
-    const [errorMsg, setErrorMsg] = useState<string>('');
     const [loading, setIsLoading] = useState<boolean>(false);
 
     const api = useApiService();
+    const dispatch = useDispatch();
 
     const validationSchema = Yup.object({
         email: Yup.string().required('Email is required'),
@@ -59,7 +61,12 @@ export const SignInForm = () => {
         } catch (error) {
             console.error(error);
             reset();
-            // setErrorMsg(typeof error === 'string' ? error : (error?.message as string as));
+            dispatch(
+                showNotification({
+                    message: typeof error === 'string' ? error : (error as Error).message,
+                    type: 'error',
+                }),
+            );
         }
     });
 

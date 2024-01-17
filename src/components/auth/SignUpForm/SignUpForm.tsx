@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,6 +11,7 @@ import { TextField } from '@/components/common/TextField/TextField';
 import { Button } from '@/components/common/Button/Button';
 import { FormProvider } from '@/components/common/FormProvider/FormProvider';
 import { useRouter } from 'next/navigation';
+import { showNotification } from '@/redux/actions/notification';
 
 //--------------------------------------------------------
 
@@ -22,11 +24,11 @@ interface FormValues {
 //--------------------------------------------------------
 
 export const SignUpForm = () => {
-    const [errorMsg, setErrorMsg] = useState<string>('');
     const [loading, setIsLoading] = useState<boolean>(false);
 
     const router = useRouter();
     const api = useApiService();
+    const dispatch = useDispatch();
 
     const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 
@@ -73,12 +75,18 @@ export const SignUpForm = () => {
         } catch (error) {
             console.error(error);
             reset();
-            // setErrorMsg(typeof error === 'string' ? error : (error?.message as string as));
+            dispatch(
+                showNotification({
+                    message: typeof error === 'string' ? error : (error as Error).message,
+                    type: 'error',
+                }),
+            );
         }
     });
 
     return (
         <FormProvider methods={methods} onSubmit={onSubmit}>
+            {/* {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>} */}
             <TextField
                 id="email"
                 type="text"
@@ -107,3 +115,6 @@ export const SignUpForm = () => {
         </FormProvider>
     );
 };
+function dispatch(arg0: { type: string; payload: string }) {
+    throw new Error('Function not implemented.');
+}
