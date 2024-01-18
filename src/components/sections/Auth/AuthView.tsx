@@ -1,12 +1,17 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 
 import { SocialMediaButton } from '@/components/common/SocialMediaButton/SocialMediaButton';
 
 import styles from './auth.module.scss';
 import { api } from '@/api/endpoints';
+import { loginUser } from '@/redux/actions/user';
+import { RootState } from '@/redux/types';
+import { showNotification } from '@/redux/actions/notification';
 
 //--------------------------------------------------------
 
@@ -25,6 +30,31 @@ interface AuthViewProps {
 
 export const AuthView = ({ content }: AuthViewProps) => {
     const router = useRouter();
+    const dispatch = useDispatch();
+
+    const searchParams = useSearchParams();
+    const accessToken = searchParams.get('accessToken');
+    const username = searchParams.get('username');
+
+    const user = useSelector((state: RootState) => state.user);
+
+    useEffect(() => {
+        if (accessToken && username && !user) {
+            dispatch(loginUser({ accessToken, username }));
+        }
+    }, [accessToken, username, dispatch]);
+
+    useEffect(() => {
+        if (user) {
+            dispatch(
+                showNotification({
+                    message: 'Glad to see you!',
+                    type: 'success',
+                }),
+            );
+            router.push('/');
+        }
+    }, [user, router]);
 
     const handleSignInWithSocial = async (socialMedia: 'twitter' | 'google') => {
         switch (socialMedia) {
@@ -32,7 +62,7 @@ export const AuthView = ({ content }: AuthViewProps) => {
                 router.push(`${api}/user/google`);
                 break;
             case 'twitter':
-                router.push(`${api}/user/twitter/callback`);
+                router.push(`${api}/user/twitter`);
                 break;
             default:
         }
