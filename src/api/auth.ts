@@ -19,23 +19,3 @@ export const _signIn = async (data: SignInArgs) => {
     const response = await axios.post(endpoints.auth.signIn, data, { headers });
     return response.data;
 };
-
-export const _signInGoogle = async () => {
-    try {
-        const response = await axios.get(endpoints.auth.signInGoogle);
-        return response.data;
-    } catch (error) {
-        console.error('Error signing in with Google:', error);
-        throw error;
-    }
-};
-
-export const _signInTwitter = async () => {
-    try {
-        const response = await axios.get(endpoints.auth.signInTwitter);
-        return response.data;
-    } catch (error) {
-        console.error('Error signing in with Twitter:', error);
-        throw error;
-    }
-};

@@ -1,11 +1,12 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import { SocialMediaButton } from '@/components/common/SocialMediaButton/SocialMediaButton';
 
 import styles from './auth.module.scss';
-import { useApiService } from '@/api';
+import { api } from '@/api/endpoints';
 
 //--------------------------------------------------------
 
@@ -23,23 +24,17 @@ interface AuthViewProps {
 //--------------------------------------------------------
 
 export const AuthView = ({ content }: AuthViewProps) => {
-    const api = useApiService();
+    const router = useRouter();
 
     const handleSignInWithSocial = async (socialMedia: 'twitter' | 'google') => {
-        let result;
-
         switch (socialMedia) {
             case 'google':
-                result = await api.auth.signInGoogle();
+                router.push(`${api}/user/google`);
                 break;
             case 'twitter':
-                result = await api.auth.signInTwitter();
+                router.push(`${api}/user/twitter/callback`);
                 break;
             default:
-        }
-
-        if (result) {
-            console.log(result);
         }
     };
 
