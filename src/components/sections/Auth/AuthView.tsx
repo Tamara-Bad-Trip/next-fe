@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { SocialMediaButton } from '@/components/common/SocialMediaButton/SocialMediaButton';
 
 import styles from './auth.module.scss';
+import { useApiService } from '@/api';
 
 //--------------------------------------------------------
 
@@ -22,6 +23,26 @@ interface AuthViewProps {
 //--------------------------------------------------------
 
 export const AuthView = ({ content }: AuthViewProps) => {
+    const api = useApiService();
+
+    const handleSignInWithSocial = async (socialMedia: 'twitter' | 'google') => {
+        let result;
+
+        switch (socialMedia) {
+            case 'google':
+                result = await api.auth.signInGoogle();
+                break;
+            case 'twitter':
+                result = await api.auth.signInTwitter();
+                break;
+            default:
+        }
+
+        if (result) {
+            console.log(result);
+        }
+    };
+
     return (
         <section className={styles.section}>
             <div className={styles['left-part']}>
@@ -31,8 +52,8 @@ export const AuthView = ({ content }: AuthViewProps) => {
                 {content.form}
                 <div className={styles['social-buttons-group']}>
                     <span className={styles['or-line']}>OR</span>
-                    <SocialMediaButton social="google" onClick={() => console.log('google')} />
-                    <SocialMediaButton social="twitter" onClick={() => console.log('twitter')} />
+                    <SocialMediaButton social="google" onClick={() => handleSignInWithSocial('google')} />
+                    <SocialMediaButton social="twitter" onClick={() => handleSignInWithSocial('twitter')} />
                 </div>
                 <p className={styles['have-account']}>
                     {content.link.title}

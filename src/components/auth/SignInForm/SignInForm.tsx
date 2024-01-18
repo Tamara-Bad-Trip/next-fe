@@ -11,6 +11,7 @@ import { showNotification } from '@/redux/actions/notification';
 import { TextField } from '@/components/common/TextField/TextField';
 import { Button } from '@/components/common/Button/Button';
 import { FormProvider } from '@/components/common/FormProvider/FormProvider';
+import { loginUser } from '@/redux/actions/user';
 
 //--------------------------------------------------------
 
@@ -57,13 +58,17 @@ export const SignInForm = () => {
         try {
             setIsLoading(true);
             const result = await api.auth.signIn({ email, password });
+            if (result) {
+                dispatch(loginUser(result));
+            }
             console.log(result);
         } catch (error) {
             console.error(error);
             reset();
             dispatch(
                 showNotification({
-                    message: typeof error === 'string' ? error : (error as Error).message,
+                    message: (error as { response?: { data?: { message?: string } } })?.response?.data
+                        ?.message as string,
                     type: 'error',
                 }),
             );

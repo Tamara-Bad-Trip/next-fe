@@ -42,7 +42,7 @@ const Toast: React.FC = () => {
 
     return (
         <div className={`${styles.toast} ${styles[notification?.type]} ${notification?.message ? styles.show : ''}`}>
-            <Image src={iconSrc} alt={`${notification?.type} icon`} />
+            {notification?.message && <Image src={iconSrc} alt={`${notification?.type} icon`} />}
             <p>{notification?.message}</p>
         </div>
     );

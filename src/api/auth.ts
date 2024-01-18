@@ -20,12 +20,22 @@ export const _signIn = async (data: SignInArgs) => {
     return response.data;
 };
 
-export const _signInGoogle = () => async () => {
-    const response = await axios.get(endpoints.auth.signInGoogle);
-    return response.data; // as IUser;
+export const _signInGoogle = async () => {
+    try {
+        const response = await axios.get(endpoints.auth.signInGoogle);
+        return response.data;
+    } catch (error) {
+        console.error('Error signing in with Google:', error);
+        throw error;
+    }
 };
 
-export const _signInTwitter = () => async () => {
-    const response = await axios.get(endpoints.auth.signInTwitter);
-    return response.data; // as IUser;
+export const _signInTwitter = async () => {
+    try {
+        const response = await axios.get(endpoints.auth.signInTwitter);
+        return response.data;
+    } catch (error) {
+        console.error('Error signing in with Twitter:', error);
+        throw error;
+    }
 };

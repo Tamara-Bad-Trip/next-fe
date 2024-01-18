@@ -83,7 +83,8 @@ export const SignUpForm = () => {
             reset();
             dispatch(
                 showNotification({
-                    message: typeof error === 'string' ? error : (error as Error).message,
+                    message: (error as { response?: { data?: { message?: string } } })?.response?.data
+                        ?.message as string,
                     type: 'error',
                 }),
             );
@@ -92,7 +93,6 @@ export const SignUpForm = () => {
 
     return (
         <FormProvider methods={methods} onSubmit={onSubmit}>
-            {/* {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>} */}
             <TextField
                 id="email"
                 type="text"
