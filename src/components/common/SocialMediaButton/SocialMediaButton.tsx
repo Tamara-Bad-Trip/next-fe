@@ -8,12 +8,16 @@ import styles from './social-media-button.module.scss';
 import googleIcon from '@/assets/social-medias/google.svg';
 import twitterIcon from '@/assets/social-medias/twitter.svg';
 
+//--------------------------------------------------------
+
 interface ButtonProps {
     social: 'twitter' | 'google';
     onClick?: () => void;
     loading?: boolean;
     disabled?: boolean;
 }
+
+//--------------------------------------------------------
 
 const label = 'Continue with';
 

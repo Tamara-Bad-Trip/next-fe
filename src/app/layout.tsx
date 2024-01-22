@@ -3,7 +3,7 @@ import { Roboto } from 'next/font/google';
 import { Providers } from '@/components/template/Providers/Providers';
 
 import '../styles/globals.scss';
-import Toast from '@/components/common/Toast/Toast';
+import { Toast } from '@/components/common/Toast/Toast';
 
 const roboto = Roboto({
     subsets: ['latin'],

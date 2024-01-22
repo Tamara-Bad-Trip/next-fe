@@ -1,8 +1,10 @@
 'use client';
 import React from 'react';
+import { PulseLoader } from 'react-spinners';
 
 import styles from './button.module.scss';
-import { PulseLoader } from 'react-spinners';
+
+//--------------------------------------------------------
 
 interface ButtonProps {
     type?: 'submit' | 'reset' | 'button';
@@ -11,6 +13,8 @@ interface ButtonProps {
     loading?: boolean;
     disabled?: boolean;
 }
+
+//--------------------------------------------------------
 
 export const Button: React.FC<ButtonProps> = ({
     type = 'button',

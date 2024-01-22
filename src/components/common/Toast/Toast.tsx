@@ -15,7 +15,7 @@ import styles from './toast.module.scss';
 // TODO: refactoring, need to create file of constants;
 const DURATION = 3000;
 
-const Toast: React.FC = () => {
+export const Toast: React.FC = () => {
     const dispatch = useDispatch();
     const notification = useSelector((state: RootState) => state.notification);
 
@@ -47,5 +47,3 @@ const Toast: React.FC = () => {
         </div>
     );
 };
-
-export default Toast;

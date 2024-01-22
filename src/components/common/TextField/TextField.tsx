@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 
@@ -6,6 +7,8 @@ import styles from './text-field.module.scss';
 
 import passwordHiddenIcon from '@/assets/password-hidden.svg';
 import passwordOpenedIcon from '@/assets/password-opened.svg';
+
+//--------------------------------------------------------
 
 interface TextFieldProps {
     type?: 'text' | 'password';
@@ -16,6 +19,8 @@ interface TextFieldProps {
     passwordShow?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
+
+//--------------------------------------------------------
 
 export const TextField: React.FC<TextFieldProps> = ({
     type = 'text',
