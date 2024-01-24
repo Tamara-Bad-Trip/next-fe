@@ -3,14 +3,16 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
+import Lottie from 'lottie-react';
 import { logoutUser } from '@/redux/actions/user';
 import { RootState } from '@/redux/types';
 import { useGetGeolocation } from '@/hooks/useGetGeolocation';
 
 import { MapComponent } from '@/components/common/MapComponent/MapComponent';
-import { Button } from '@/components/common/Button/Button';
 
 import styles from './home.module.scss';
+
+import animation from '@/assets/lottie/logo-spinner.json';
 
 //--------------------------------------------------------
 
@@ -36,11 +38,13 @@ export const HomeView = () => {
             {geolocation.latitude && geolocation.longitude ? (
                 <MapComponent geolocation={geolocation} />
             ) : (
-                <>
-                    <h1>{`Hello ${user?.username}`}</h1>
-                    <Button label="Sign Out" onClick={handleLogOut} />
-                </>
+                <Lottie animationData={animation} loop={true} />
             )}
         </section>
     );
 };
+
+{
+    /* <h1>{`Hello ${user?.username}`}</h1>
+<Button label="Sign Out" onClick={handleLogOut} /> */
+}

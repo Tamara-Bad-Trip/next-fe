@@ -48,12 +48,15 @@ export const MapComponent: React.FC<MapComponentProps> = ({ geolocation }) => {
             const mapOptions: google.maps.MapOptions = {
                 center: position,
                 disableDefaultUI: true,
-                clickableIcons: true,
+                disableDoubleClickZoom: true,
+                clickableIcons: false,
                 zoom: 12,
                 mapId: 'NEXT_FE_BAD_TRIP',
             };
 
             const map = new Map(mapRef.current as HTMLDivElement, mapOptions);
+
+            map.setOptions({ draggableCursor: 'pointer' });
 
             map.addListener('click', (event: google.maps.MapMouseEvent) => {
                 const clickedLatLng = event?.latLng?.toJSON();
