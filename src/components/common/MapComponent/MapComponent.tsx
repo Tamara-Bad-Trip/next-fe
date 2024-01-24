@@ -1,10 +1,13 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { Loader } from '@googlemaps/js-api-loader';
+import { GeolocationType } from '@/hooks/useGetGeolocation';
 
 import styles from './map-component.module.scss';
-import { GeolocationType } from '@/hooks/useGetGeolocation';
+import { showModal } from '@/redux/actions/modal';
+import { setGeolocation } from '@/redux/actions/geolocation';
 
 //--------------------------------------------------------
 
@@ -16,6 +19,15 @@ interface MapComponentProps {
 
 export const MapComponent: React.FC<MapComponentProps> = ({ geolocation }) => {
     const mapRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
+
+    const handleShowModal = () => {
+        dispatch(showModal({ type: 'create-point' }));
+    };
+
+    const handleSetGeolocation = (lat: number, lng: number) => {
+        dispatch(setGeolocation({ lat, lng }));
+    };
 
     useEffect(() => {
         const initMap = async () => {
@@ -35,11 +47,19 @@ export const MapComponent: React.FC<MapComponentProps> = ({ geolocation }) => {
 
             const mapOptions: google.maps.MapOptions = {
                 center: position,
+                disableDefaultUI: true,
+                clickableIcons: true,
                 zoom: 12,
                 mapId: 'NEXT_FE_BAD_TRIP',
             };
 
             const map = new Map(mapRef.current as HTMLDivElement, mapOptions);
+
+            map.addListener('click', (event: google.maps.MapMouseEvent) => {
+                const clickedLatLng = event?.latLng?.toJSON();
+                handleShowModal();
+                handleSetGeolocation(clickedLatLng?.lat as number, clickedLatLng?.lng as number);
+            });
 
             const marker = new Marker({
                 map,

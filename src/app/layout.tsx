@@ -4,6 +4,7 @@ import { Providers } from '@/components/template/Providers/Providers';
 
 import '../styles/globals.scss';
 import { Toast } from '@/components/common/Toast/Toast';
+import { Modal } from '@/components/common/Modal/Modal';
 
 const roboto = Roboto({
     subsets: ['latin'],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={roboto.className} suppressHydrationWarning={true}>
                 <Providers>
+                    <Modal />
                     <Toast />
                     {children}
                 </Providers>

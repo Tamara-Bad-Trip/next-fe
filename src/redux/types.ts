@@ -12,9 +12,24 @@ export interface UserActionPayload {
 
 //--------------------------------------------------------
 
+export interface ModalActionPayload {
+    type: 'create-point' | 'delete-point';
+}
+
+//--------------------------------------------------------
+
+export interface GeolocationActionPayload {
+    lat: number;
+    lng: number;
+}
+
+//--------------------------------------------------------
+
 export interface RootState {
     notification: NotificationActionPayload;
     user: UserActionPayload;
+    modal: ModalActionPayload;
+    geolocation: GeolocationActionPayload;
 }
 
 //--------------------------------------------------------
