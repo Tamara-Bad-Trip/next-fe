@@ -19,7 +19,8 @@ import animation from '@/assets/lottie/logo-spinner.json';
 export const HomeView = () => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const geolocation = useGetGeolocation();
+    const geolocation = { latitude: 46.471492639904994, longitude: 30.733856507703727 };
+    // const geolocation = useGetGeolocation();
 
     const user = useSelector((state: RootState) => state.user);
 
@@ -29,13 +30,13 @@ export const HomeView = () => {
         }
     }, [user]);
 
-    const handleLogOut = () => {
-        dispatch(logoutUser());
-    };
+    // const handleLogOut = () => {
+    //     dispatch(logoutUser());
+    // };
 
     return (
         <section className={styles.section}>
-            {geolocation.latitude && geolocation.longitude ? (
+            {geolocation?.latitude && geolocation?.longitude ? (
                 <MapComponent geolocation={geolocation} />
             ) : (
                 <Lottie animationData={animation} loop={true} />

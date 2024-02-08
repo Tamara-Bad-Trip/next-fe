@@ -1,12 +1,17 @@
-import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
+import { Metadata } from 'next';
+import { Roboto, Josefin_Slab } from 'next/font/google';
 import { Providers } from '@/components/template/Providers/Providers';
 
 import '../styles/globals.scss';
 import { Toast } from '@/components/common/Toast/Toast';
 import { Modal } from '@/components/common/Modal/Modal';
 
-const roboto = Roboto({
+export const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+});
+
+export const josefinSlab = Josefin_Slab({
     subsets: ['latin'],
     weight: ['400', '500', '700'],
 });

@@ -50,7 +50,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ geolocation }) => {
                 disableDefaultUI: true,
                 disableDoubleClickZoom: true,
                 clickableIcons: false,
-                zoom: 12,
+                zoom: 10,
                 mapId: 'NEXT_FE_BAD_TRIP',
             };
 
@@ -74,5 +74,5 @@ export const MapComponent: React.FC<MapComponentProps> = ({ geolocation }) => {
         }
     }, [geolocation]);
 
-    return <div className={styles['map-container']} ref={mapRef} />;
+    return <div className={styles['map-container']} ref={mapRef} style={{ outline: 'none' }} />;
 };

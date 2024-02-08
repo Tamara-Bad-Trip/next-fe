@@ -6,6 +6,7 @@ import { RootState } from '@/redux/types';
 
 import styles from './modal.module.scss';
 import { hideModal } from '@/redux/actions/modal';
+import { CreatePointForm } from '@/components/modal/CreatePointForm/CreatePointForm';
 
 //--------------------------------------------------------
 
@@ -17,11 +18,12 @@ export const Modal: React.FC = () => {
         dispatch(hideModal());
     };
 
-    console.log(modal);
-
     return (
-        <div className={`${styles['modal-shadow']} ${modal?.type ? styles.show : ''}`} onClick={handleCloseModal}>
-            <div className={styles.modal}></div>
+        <div className={`${styles['modal-container']} ${modal?.type ? styles.show : ''}`}>
+            <div className={styles['modal-shadow']} onClick={handleCloseModal} />
+            <div className={styles.modal}>
+                <CreatePointForm />
+            </div>
         </div>
     );
 };
