@@ -6,7 +6,6 @@ import { getContent } from '@/contentful/utils';
 import { contentfulConstants } from '@/contentful/contentful-constants';
 import { AboutUsView } from '@/components/sections/AboutUs/AboutUsView';
 import { Navigation } from '@/components/common/Navigation/Navigation';
-import { josefinSlab } from '../layout';
 
 //--------------------------------------------------------
 
