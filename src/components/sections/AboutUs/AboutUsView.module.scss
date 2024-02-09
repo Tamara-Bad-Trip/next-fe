@@ -1,7 +1,10 @@
+@import '../../../styles/variables.scss';
+
 .section {
     min-height: 100vh;
     max-width: 1280px;
     margin: 0 auto;
+    padding: 20px 0;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -9,33 +12,47 @@
     flex-direction: column;
     gap: 20px;
     margin: 0 auto;
+    padding-bottom: 90px;
+    font-family: $font-family-josefin-slab;
 
     & > h3 {
         font-size: 21px;
         font-weight: 700;
+        color: $secondary-color;
     }
 
     & > h4 {
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 700;
+        color: $secondary-color;
     }
 
     & > p {
         font-size: 16px;
-        font-weight: 400;
+        font-weight: 500;
+        color: $text-color-main;
     }
 
     & > ol {
         display: flex;
         flex-direction: column;
+        color: $text-color-main;
+        font-weight: 500;
         gap: 15px;
     }
 
     & > ol > li > p > b {
         font-weight: 700;
+        color: $secondary-color;
     }
 
     & > button {
         max-width: 320px;
+    }
+}
+
+@media (max-width: $breakpoint-xl) {
+    .section {
+        padding: 20px;
     }
 }

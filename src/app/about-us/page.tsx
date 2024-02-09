@@ -4,8 +4,8 @@ import { Document } from '@contentful/rich-text-types';
 
 import { getContent } from '@/contentful/utils';
 import { contentfulConstants } from '@/contentful/contentful-constants';
-
 import { AboutUsView } from '@/components/sections/AboutUs/AboutUsView';
+import { Navigation } from '@/components/common/Navigation/Navigation';
 import { josefinSlab } from '../layout';
 
 //--------------------------------------------------------
@@ -25,7 +25,8 @@ const contentId = contentfulConstants.content.aboutUsContent;
 export default async function AboutUs() {
     const fetchedContent = await getContent(spaceId as string, contentId as string);
     return (
-        <main className={josefinSlab.className}>
+        <main>
+            <Navigation />
             <AboutUsView content={fetchedContent?.aboutUsContent as Document} />
         </main>
     );

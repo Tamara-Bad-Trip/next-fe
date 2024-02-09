@@ -9,11 +9,7 @@ import { Modal } from '@/components/common/Modal/Modal';
 export const roboto = Roboto({
     subsets: ['latin'],
     weight: ['400', '500', '700'],
-});
-
-export const josefinSlab = Josefin_Slab({
-    subsets: ['latin'],
-    weight: ['400', '500', '700'],
+    display: 'swap',
 });
 
 export const metadata: Metadata = {
