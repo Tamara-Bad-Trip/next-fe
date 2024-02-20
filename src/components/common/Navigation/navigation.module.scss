@@ -11,7 +11,7 @@
     max-width: fit-content;
     z-index: 99999;
     padding: 10px;
-    background-color: $background-color-secondary;
+    background-color: $background-color-main;
     border-radius: 24px;
     font-family: $font-family-josefin-slab;
 }
@@ -30,6 +30,6 @@
 }
 
 .active {
-    background-color: $secondary-color;
+    background-color: $text-color-main;
     color: $background-color-secondary;
 }

@@ -27,7 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={roboto.className} suppressHydrationWarning={true}>
                 <Providers>
-                    <Modal />
+                    {/* TODO: refactor modal */}
+                    {/* <Modal /> */}
                     <Toast />
                     {children}
                 </Providers>

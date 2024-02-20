@@ -8,3 +8,11 @@ export type SignUpArgs = {
     email: string;
     password: string;
 };
+
+export type SendMessage = {
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+    message: string;
+};

@@ -1,10 +1,12 @@
-import * as user from './auth';
+import * as auth from './services/auth';
+import * as email from './services/email';
 
 export function useApiService() {
     return {
         auth: {
-            signUp: user._signUp,
-            signIn: user._signIn,
+            signUp: auth._signUp,
+            signIn: auth._signIn,
         },
+        sendEmail: email._sendEmail,
     };
 }

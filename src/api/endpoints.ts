@@ -6,4 +6,5 @@ export const endpoints = {
         signUp: `${api}/user`,
         signIn: `${api}/user/sign-in`,
     },
+    email: `${api}/email`,
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { endpoints } from './endpoints';
-import { SignInArgs, SignUpArgs } from './types';
+import { endpoints } from '../endpoints';
+import { SignInArgs, SignUpArgs } from '../types';
 
 export const _signUp = async (data: SignUpArgs) => {
     const headers = {

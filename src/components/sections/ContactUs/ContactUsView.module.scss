@@ -1,0 +1,100 @@
+@import '../../../styles/variables.scss';
+
+.section {
+    min-height: 100vh;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 0;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 90px;
+    font-family: $font-family-josefin-slab;
+
+    & > h1 {
+        font-size: 18px;
+        font-weight: 700;
+        color: $text-color-main;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    & > h1 > b {
+        font-size: 36px;
+        font-weight: 700;
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100%;
+    padding-top: 32px;
+    gap: 32px;
+
+    & > form {
+        width: 100%;
+        font-family: $font-family-roboto;
+
+        & > div {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+
+            & > div {
+                width: 100%;
+            }
+        }
+
+        & > button {
+            max-width: 50%;
+            margin-left: auto;
+        }
+    }
+}
+
+.right-part {
+    height: 65vh;
+    padding: 20px;
+    border-radius: 24px;
+    background-color: $text-color-main;
+    width: 100%;
+    color: $text-light;
+
+    & > h3 {
+        font-size: 22px;
+        font-weight: 600;
+        margin: 0 0 5px 0;
+    }
+
+    & > h5 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 32px 0;
+    }
+
+    & > ul {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        & > li {
+            font-size: 18px;
+            font-weight: 600;
+
+            & > p > a {
+                text-decoration: none;
+                color: $secondary-color;
+                margin: 0 0 0 10px;
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-xl) {
+    .section {
+        padding: 20px;
+    }
+}
