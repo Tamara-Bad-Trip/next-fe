@@ -11,7 +11,7 @@
     max-width: fit-content;
     z-index: 99999;
     padding: 10px;
-    background-color: $background-color-main;
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 24px;
     font-family: $font-family-josefin-slab;
 }
@@ -30,6 +30,6 @@
 }
 
 .active {
-    background-color: $text-color-main;
+    background-color: rgba(74, 69, 67, 0.9);
     color: $background-color-secondary;
 }
